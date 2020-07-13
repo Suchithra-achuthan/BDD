@@ -39,10 +39,7 @@ public class Borland {
 		obj2.GlassesQty.sendKeys(Glasses);
 		obj2.SocksQty.sendKeys(Socks);
 		obj2.BootsQty.sendKeys(Boots);
-		obj2.ShortsQty.sendKeys(Shorts);
-		
-		
-		
+		obj2.ShortsQty.sendKeys(Shorts);	
 	}
 	@And ("^I click on Place an Order button$")
 	public void ClickPlaceOrder()
