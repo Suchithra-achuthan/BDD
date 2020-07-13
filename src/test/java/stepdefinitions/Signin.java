@@ -1,6 +1,14 @@
 package stepdefinitions;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -52,17 +60,30 @@ public class Signin {
 		obj2.btnEnter.click();
 	}
 	@Then ("^I verify error message is displayed as \"(.*)\"$")
-	public void CheckError(String Error)
+	public void CheckError(String Error) throws IOException
 	{
 		SignInDetails obj2 = new SignInDetails(driver);
 		if(obj2.msgerror.getText().equals(Error))
 		{
 			System.out.println("Verification pass");
+			this.Screenshot(driver);
+			
 		}
 		else
 		{
 			Assert.fail("Verification Fail");
 		}
+		
+	}
+	private void Screenshot(WebDriver driver) throws IOException
+	{
+		TakesScreenshot scrshot = ((TakesScreenshot)driver);
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy_mm_dd hh_mm_ss");
+		Date date = new Date();
+		String dateval=sdf.format(date);
+		File ScrFile = scrshot.getScreenshotAs(OutputType.FILE);
+		File DesFile = new File(System.getProperty("user.dir")+"\\src\\Output_Images\\"+dateval+".PNG");
+		FileUtils.copyFile(ScrFile,DesFile);
 		
 	}
 }
