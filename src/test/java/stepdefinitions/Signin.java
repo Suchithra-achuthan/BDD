@@ -63,15 +63,10 @@ public class Signin {
 	public void CheckError(String Error) throws IOException
 	{
 		SignInDetails obj2 = new SignInDetails(driver);
-		if(obj2.msgerror.getText().equals(Error))
-		{
-			System.out.println("Verification pass");
-			this.Screenshot(driver);
-			
-		}
-		else
+		if(!obj2.msgerror.getText().equals(Error))
 		{
 			Assert.fail("Verification Fail");
+			this.Screenshot(driver);
 		}
 		
 	}
